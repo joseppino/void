@@ -7,8 +7,6 @@
   export let data: PageData;
 
   let post: any;
-
-  $: console.log(post);
   
   onMount(() => {
     fetchPost(Number(data.postId));
@@ -32,6 +30,13 @@
     <img src={post.imageurl} alt="">
   {/if}
   <h2>{post.title}</h2>
+  {#if post.tags}
+    <div class="tags">
+      {#each post.tags as tag}
+        <kbd class="tag">{'#' + tag.toLowerCase()}</kbd>
+      {/each}
+    </div>
+  {/if}
   <p>{@html marked.parse(post.body)}</p>
 
 {/if}
